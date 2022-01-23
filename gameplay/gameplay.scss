@@ -1,0 +1,526 @@
+@import "../styles/mixins";
+@import "../styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", sans-serif;
+}
+
+body {
+  background: #c6ffdd;
+  background: -webkit-linear-gradient(
+    -120deg,
+    hsl(358, 89%, 78%),
+    #fbd786,
+    #c6ffdd
+  );
+  background: linear-gradient(
+    -120deg,
+    hsl(358, 89%, 78%),
+    #fbd786,
+    #c6ffdd
+  );
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  margin: 0;
+}
+
+span {
+  font-weight: bold;
+}
+
+.result-alert {
+  @include dFlexCenter(column);
+  position: absolute;
+  padding: 0.25rem 0.75rem;
+  font-family: $font-text-3;
+  color: white;
+  left: 1rem;
+  bottom: 1rem;
+  background:#3ecc79;
+  border-radius: 6px;
+  user-select: none;
+  transform: scale(0);
+  transition: all 1s ease;
+}
+
+.container {
+  .user {
+    text-align: center;
+    width: 135px;
+    height: 3.25rem;
+    white-space: nowrap;
+    padding: 0.8rem 0.5rem;
+    position: absolute;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    top: 100px;
+    left: 20px;
+    box-shadow: 0 6px 0 0 hsl(0, 100%, 40%);
+    border: 3px solid hsl(0, 100%, 40%);
+    background-color: hsl(351, 77%, 98%);
+    color: hsl(0, 100%, 40%);
+    font-weight: bold;
+    user-select: none;
+  }
+
+  .alert-box-container,
+  .guide-box {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    div {
+      @include size(320px, 150px);
+      @include dFlexCenter(column);
+      display: none;
+      align-items: center;
+      position: absolute;
+      z-index: 50;
+      border: 3px solid rgb(126, 126, 126);
+      border-radius: 10px;
+      outline: 10px solid whitesmoke;
+      background: whitesmoke;
+      font-family: "Roboto Mono", sans-serif;
+      font-size: 1.25rem;
+      color: $primary-clr-2;
+      box-shadow: 0 0px 4px 8px rgba(0, 0, 0, 0.8);
+      button:first-of-type {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: whitesmoke;
+        font-size: 1.5rem;
+        color: $primary-clr-3;
+      }
+
+      // ADD MONEY BOX ==================
+      &:last-of-type {
+        ul {
+          @include dFlexCenter(row);
+          list-style: none;
+          font-size: 0.8rem;
+          li {
+            padding: 0.4rem 0.5rem;
+            margin: 1.5rem 0.2rem 0 0.2rem;
+            border: 2px solid $primary-clr-2;
+            border-radius: 10px;
+            cursor: pointer;
+            &:hover {
+              background: $primary-clr-2;
+              color: white;
+            }
+          }
+        }
+        button:nth-of-type(2) {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background: whitesmoke;
+          font-size: 1.5rem;
+          color: $primary-clr-3;
+        }
+      }
+
+      // INCREASE BET LEVEL BOX ===========
+      &:nth-of-type(2) {
+        height: 250px;
+        p {
+          font-size: 1rem;
+          margin-bottom: 0.25rem;
+          user-select: none;
+          span {
+            text-transform: uppercase;
+            font-weight: normal;
+          }
+        }
+        button:last-of-type {
+          @include buttonStyle();
+          border: 2px solid $primary-clr-3;
+          border-radius: 4px;
+          color: $primary-clr-3;
+          padding: 0.5rem 1.5rem;
+          color: white;
+          margin-top: 0.75rem;
+          background-color: $primary-clr-3;
+          &:hover {
+            color: $primary-clr-3;
+            background-color: whitesmoke;
+          }
+        }
+        ul {
+          @include dFlexCenter(row);
+          list-style: none;
+          flex-wrap: wrap;
+          font-size: 0.8rem;
+          li {
+            @include size(50px, 50px);
+            @include dFlexCenter(row);
+            font-family: $font-text-3;
+            margin: 0.25rem;
+            border: 2px solid $primary-clr-2;
+            border-radius: 10px;
+            user-select: none;
+            cursor: pointer;
+          }
+        }
+        ul > li {
+          padding: 1rem;
+          font-weight: bold;
+        }
+        ul > li[selected=true] {
+          background: $primary-clr-2;
+          color: white;
+        }
+      }
+
+      // DANGER ALERT BOX ==============
+      &:first-of-type {
+        button:last-of-type {
+          background-color: transparent;
+          margin-top: 10px;
+          border-radius: 5px;
+          color: green;
+          border: 2px solid green;
+          padding: 0.5rem;
+        }
+      }
+    } // main div
+  }
+
+  // GUIDE BOX =============================
+  .guide-box {
+    @include size(100%, 100vh);
+    display: none;
+    overflow: hidden;
+    font-size: 1.25rem;
+    background: rgba(255, 255, 255, 0.8);
+    button {
+      position: absolute;
+      top: 4rem;
+      right: 4rem;
+      font-size: 3rem;
+      background: transparent;
+    }
+  }
+
+  button {
+    @include buttonStyle();
+  }
+  .leave-btn {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    border: 3px solid rgb(54, 54, 54);
+    color: rgb(54, 54, 54);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+  }
+  .show-guide-box {
+    position: absolute;
+    transform: rotate(0);
+    top: 15px;
+    right: 15px;
+    color: rgb(54, 54, 54);
+    border-radius: 100%;
+    font-size: 2rem;
+    position: absolute;
+    background: transparent;
+  }
+
+  // RESULT BOARD ======================
+  .info {
+    @include dFlexCenter(column);
+    @include size(40%, 30vh);
+    border: 5px solid $primary-clr-5;
+    border-radius: 40px;
+    margin: 10px auto;
+    position: relative;
+
+    .loading-box {
+      @include size(100%, 100%);
+      @include dFlexCenter();
+      position: absolute;
+    }
+
+    .loading {
+      @include size(45px, 45px);
+      content: "";
+      position: absolute;
+      background-color: $primary-clr-5;
+      border-radius: 10px;
+      -webkit-animation: rolling 2s infinite;
+      animation: rolling 2s infinite;
+      display: none;
+    }
+    .loading:nth-of-type(2) {
+      left: 30%;
+    }
+    .loading:nth-of-type(3) {
+      right: 30%;
+    }
+
+    @keyframes rolling {
+      0% {
+        -webkit-transform: rotate(90deg);
+        rotate: 90deg;
+      }
+      25% {
+        -webkit-transform: rotate(180deg);
+        rotate: 180deg;
+      }
+      100% {
+        -webkit-transform: rotate(-90deg);
+        rotate: -90deg;
+      }
+    }
+
+    .result {
+      @include size(100%, 240px);
+      @include dFlexCenter(row);
+      border-radius: 100%;
+      .cube {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        margin: 0 15px;
+        width: 65px;
+        height: 65px;
+        border: 3px solid $primary-clr-5;
+        background: rgb(253, 228, 232);
+        border-radius: 12px;
+      }
+      img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        user-select: none;
+      }
+    }
+
+    button {
+      position: absolute;
+      bottom: 10px;
+      border-radius: 100%;
+      height: 2.5rem;
+      width: 2.5rem;
+      font-size: 1rem;
+      background: $primary-clr-2;
+      border: 3px solid $primary-clr-5;
+      color: $primary-clr-5;
+      transition: all 0.4s ease;
+      &:hover {
+        background: $primary-clr-5;
+        color: $primary-clr-2;
+      }
+    }
+  } // RESULT BOARD
+
+  // BOARD =================================
+  .board {
+    @include size(100%, 65vh);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    p {
+      user-select: none;
+      font-weight: bold;
+      font-family: $font-text-3;
+      span {
+        font-family: $font-text-3;
+      }
+      &:first-child {
+        border: 4px solid $primary-clr-2;
+        color: $primary-clr-3;
+        border-radius: 10px;
+        padding: 10px 20px;
+        transition: all 0.4s ease;
+        &:hover {
+          border-radius: 20px;
+          border-color: $primary-clr-3;
+        }
+      }
+      &:last-child {
+        border: 3px solid $primary-clr-3;
+        color: $primary-clr-3;
+        padding: 0.8rem;
+        border-radius: 8px;
+        background: rgb(248, 213, 219);
+        box-shadow: 0 4px 0 0 $primary-clr-3;
+      }
+    }
+    .box {
+      @include size(450px, 225px);
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      grid-gap: 15px;
+      margin: 1rem 0 1.5rem 0;
+      div {
+        @include dFlexCenter();
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 3px solid $primary-clr-3;
+        box-shadow: 0 8px 0 0 $primary-clr-3;
+        background: rgb(255, 230, 240);
+        cursor: pointer;
+        position: relative;
+        transition: all 0.1s ease;
+        &:hover {
+          -webkit-filter: brightness(0.95);
+          filter: brightness(0.95);
+        }
+        img {
+          height: 50px;
+          width: 50px;
+          background-size: cover;
+          user-select: none;
+        }
+        p {
+          position: absolute;
+          margin: 0;
+          padding: 0;
+          top: 0;
+          right: 5px;
+          font-family: $font-text-3;
+          font-size: 1.05rem;
+          color: rgb(15, 192, 15);
+          border: none;
+        }
+      }
+    }
+  }
+} // BOARD
+
+.box div[select=true] {
+  margin-top: 7px !important;
+  box-shadow: 0 1px 0 0 $primary-clr-3 !important;
+  filter: brightness(0.8) !important;
+}
+
+// *************************************************** //
+
+@media screen and (max-width: 961px) {
+  .container {
+    @include size(100%, 100vh);
+    @include dFlexCenter(column);
+    .info {
+      width: 60%;
+      height: 200px;
+    }
+    .board {
+      height: 60vh;
+      .box {
+        width: 350px !important;
+        height: 200px !important;
+        div {
+          @include dFlexCenter();
+        }
+      }
+    }
+    .user {
+      @include size(100px, 2.5rem);
+      @include dFlexCenter();
+      border-radius: 8px;
+      border: 3px solid hsl(0, 100%, 40%);
+      box-shadow: 0 4px 0 0 hsl(0, 100%, 40%);
+      font-size: 0.6rem;
+    }
+  }
+  .guide-box {
+    display: none;
+    pre {
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .result {
+    @include size(100%, 120px);
+    @include dFlexCenter(row);
+    border-radius: 100%;
+    .cube {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 15px;
+      width: 40px !important;
+      height: 40px !important;
+      border-radius: 8px !important;
+    }
+    img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+  }
+
+  .loading {
+    height: 30px !important;
+    width: 30px !important;
+  }
+
+  .loading:nth-of-type(2) {
+    left: 25% !important;
+  }
+  .loading:nth-of-type(3) {
+    right: 25% !important;
+  }
+
+  .guide-box {
+    display: none;
+    pre {
+      font-size: 0.45rem !important;
+    }
+  }
+
+  .container {
+    @include size(100%, 100vh);
+    @include dFlexCenter(column);
+    p {
+      font-size: 0.75rem;
+    }
+    .info {
+      width: 60%;
+      height: 175px;
+      margin-top: 55px;
+    }
+    .board {
+      .box {
+        width: 320px !important;
+        height: 180px !important;
+      }
+    }
+    .user {
+      left: 0;
+      right: 0;
+      top: 5px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

@@ -1,0 +1,530 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+@import "./_variables";
+@import "./_mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  @include dFlex(column);
+  @include size(100%, 100vh);
+  background: linear-gradient(to right, $primary-clr-1, rgb(255, 196, 205));
+  position: relative;
+
+  .show-guide-btn {
+    @include buttonStyle();
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    color: $primary-clr-3;
+    font-size: 2em;
+  }
+
+  .guide-box {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translate(-50%, -50%);
+    button {
+      @include buttonStyle();
+      position: absolute;
+      top: 4rem;
+      right: 4rem;
+      font-size: 2rem;
+      background: transparent;
+    }
+    pre {
+      font-family: $font-text-1;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  // STORED USERS BUTTON =====================
+  .current-user-selection-btn-container {
+    @include size(6.5rem, 2.8rem);
+    @include dFlexCenter();
+    margin-bottom: 0.5rem;
+    .current-user-selection-btn {
+      @include buttonStyle();
+      @include size(100%, 100%);
+      background-color: whitesmoke;
+      border: 3px solid $primary-clr-3;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      color: $primary-clr-3;
+      box-shadow: 0 6px 0 0px $primary-clr-3;
+      margin-bottom: 10px;
+      &.clicked {
+        margin-top: 6px;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // USERNAME INPUT
+  .user-input-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    .user-input {
+      @include size(100%, 100%);
+      @include dFlexCenter();
+      form {
+        @include dFlexCenter(column);
+        height: 250px;
+        width: 350px;
+        border: 3px solid rgb(126, 126, 126);
+        border-radius: 10px;
+        outline: 10px solid whitesmoke;
+        background: whitesmoke;
+        box-shadow: 0 0px 4px 8px rgba(0, 0, 0, 0.8);
+        font-family: $font-text-1;
+        font-size: 1.25rem;
+        color: $primary-clr-2;
+        position: relative;
+        p {
+          padding: 0 1.5rem;
+          font-size: 1rem;
+          color: $primary-clr-2;
+          user-select: none;
+        }
+
+        .close-user-input-btn {
+          @include buttonStyle();
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background: whitesmoke;
+          font-size: 1.5rem;
+          color: $primary-clr-3;
+        }
+
+        .form-submit-btn {
+          @include buttonStyle();
+          @include size(5rem, 2.5rem);
+          border: 2px solid black;
+          position: absolute;
+          bottom: 5px;
+          margin: 0 2px;
+          border-radius: 8px;
+          border: 2px solid $primary-clr-2;
+          font-family: $font-text-1;
+          color: white;
+          background-color: $primary-clr-2;
+          transition: all 0.4s ease;
+          &:hover {
+            color: $primary-clr-2;
+            border: 2px solid $primary-clr-2;
+            background-color: white;
+          }
+        }
+
+        input {
+          @include size(15rem, 3rem);
+          text-align: center;
+          border: none;
+          font-family: $font-text-1;
+          font-size: 1rem;
+          font-weight: bold;
+          color: rgb(126, 126, 126);
+          caret-color: $primary-clr-3;
+          border: 3px solid rgb(126, 126, 126);
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          padding: 0 1rem;
+          margin-bottom: 1rem;
+          margin-top: 0.5rem;
+          &:focus {
+            outline: none;
+            border-radius: 15px;
+          }
+        }
+        .note {
+          opacity: 1;
+          text-align: center;
+          font-size: 0.65rem;
+          user-select: none;
+        }
+      }
+    }
+  } // USERNAME INPUT
+
+  // ALERT BOX ===================
+  .alert-box-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    .alert-box {
+      @include size(320px, 150px);
+      @include dFlexCenter();
+      position: relative;
+      border: 3px solid rgb(126, 126, 126);
+      border-radius: 10px;
+      outline: 10px solid whitesmoke;
+      background: whitesmoke;
+      box-shadow: 0 0px 4px 8px rgba(0, 0, 0, 0.8);
+      font-family: "Roboto Mono", sans-serif;
+      font-size: 1.25rem;
+      color: $primary-clr-2;
+      button {
+        @include buttonStyle();
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: whitesmoke;
+        font-size: 1.5rem;
+        color: $primary-clr-3;
+      }
+    }
+  }
+  .play-btn-div {
+    height: 200px;
+    div {
+      height: 65px;
+      margin-bottom: 2rem;
+    }
+    button {
+      @include size(180px, 100%);
+      @include buttonStyle();
+      font-family: 'Roboto Mono', sans-serif;
+      letter-spacing: 1px;
+      text-transform: capitalize;
+      background: hsla(15, 100, 75, 1);
+      border: 3px solid $primary-clr-3;
+      box-shadow: 0 6px 0 0 $primary-clr-3;
+      font-size: 0.9rem;
+      color: white;
+      border-radius: 8px;
+      &:hover {
+        -webkit-filter: brightness(1.1);
+        filter: brightness(1.1);
+      }
+      &[clicked=true] {
+        margin-top: 6px;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // CURRENT STORED-USERS LIST ==================
+  .current-user-selection {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.3);
+    .user-list-container {
+      @include dFlexCenter();
+      padding-top: 2.5rem;
+      padding-bottom: 1rem;
+      flex-direction: column;
+      width: 450px;
+      position: relative;
+      border: 3px solid rgb(126, 126, 126);
+      border-radius: 10px;
+      outline: 10px solid whitesmoke;
+      background: whitesmoke;
+      box-shadow: 0 0px 4px 8px rgba(0, 0, 0, 0.8);
+      font-family: "Roboto Mono", sans-serif;
+      font-size: 1.25rem;
+      color: $primary-clr-2;
+      
+      p {
+        font-size: 0.8rem;
+        text-align: center;
+        padding: 1rem;
+        border: 4px solid $primary-clr-2;
+        color: $primary-clr-2;
+        border-radius: 8px;
+        background: whitesmoke;
+        border: 4px solid $primary-clr-2;
+        font-weight: bold;
+      }
+
+      hr {
+        width: 65%;
+        height: 3px;
+        background: rgb(126, 126, 126);
+        border: none;
+        outline: none;
+        margin: 1rem 0;
+      }
+
+      .current-user-selection-close-btn {
+        @include buttonStyle();
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: whitesmoke;
+        font-size: 1.5rem;
+        color: $primary-clr-3;
+      }
+      
+      .user-list {
+        @include dFlexCenter(column);
+        list-style: none;
+        width: 100%;
+        .user {
+          @include dFlexCenter(row);
+          border: 2px solid $primary-clr-2;
+          height: 40px;
+          width: 80%;
+          margin: 5px 0;
+          span:first-of-type {
+            width: 50%;
+            overflow: hidden;
+          }
+          span:last-of-type {
+            width: 40%;
+            overflow: hidden;
+            font-family: $font-text-3;            
+          }
+          li {
+            @include dFlexCenter();
+            width: 95%;
+            height: 100%;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            &:hover {
+              background: hsla(15, 100, 80, 1);
+              color: white;
+            }
+          }
+          button {
+            @include buttonStyle();
+            position: relative;
+            width: 10%;
+            height: 100%;
+            font-size: 1rem;
+            color: $primary-clr-2;
+            background: whitesmoke;
+            transition: all 0.3s ease;
+            z-index: 2;
+            &:hover {
+              background-color: $primary-clr-2;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// TITLE ==========================
+.title {
+  @include dFlexCenter();
+  font-family: $font-title;
+  font-family: "Lobster", sans-serif;
+  letter-spacing: 3px;
+  font-size: 6rem;
+  margin-bottom: 20px;
+  background: -webkit-linear-gradient(to right, #eb3a3a, #f0cb35);
+  background: linear-gradient(to right, #eb3a3a, #f0cb35);
+  background-clip: text;
+  user-select: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.4s ease-out;
+  &:hover {
+    letter-spacing: 8px;
+  }
+}
+
+// MODE SECTION =============================
+.mode-section {
+  @include dFlexCenter(column);
+  width: 100%;
+  p {
+    @include underlineHover(1, $primary-clr-3);
+    margin: 1rem 0 0.35rem 0;
+    font-size: 1.25rem;
+    font-family: $font-text-2;
+    font-weight: bold;
+    user-select: none;
+    color: $primary-clr-3;
+  }
+  .button-div {
+    @include size(100%, 10vh);
+    display: flex;
+    justify-content: center;
+    button {
+      @include size(8em, 3.5em);
+      @include buttonStyle();
+      font-family: $font-text-3;
+      font-weight: bold;
+      font-size: 1.25rem;
+      letter-spacing: 1.2px;
+      color: $primary-clr-3;
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 10px;
+      background: $primary-clr-1;
+      border: 3px solid $primary-clr-3;
+      box-shadow: 0 7px 0 0 $primary-clr-3;
+      transition: box-shadow 0.1s ease, margin 0.1s ease;
+      &:hover {
+        -webkit-filter: brightness(1.1);
+        filter: brightness(1.1);
+      }
+    }
+    [select="true"] {
+      margin-top: 7px;
+      box-shadow: none;
+      background-color:hsla(15, 100, 76, 1);
+      color: white;
+    }
+  }
+}
+
+// *********************************************** //
+
+@media screen and (min-height: 768px) {
+  .title {
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 824px) {
+  .guide-box {
+    font-size: 0.65rem !important;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  .title {
+    font-size: 4rem;
+  }
+
+  .guide-box {
+    font-size: 0.45rem !important;
+  }
+
+  .play-btn-div {
+    height: 135px !important;
+    div {
+      margin-bottom: 0 !important;
+    }
+    button {
+      width: 120px !important;
+      height: 45px !important;
+      font-size: 0.65rem !important;
+    }
+  }
+  .current-user-selection-btn {
+    width: 90px !important;
+    height: 35px !important;
+    font-size: 1rem !important;
+  }
+
+  .play-btn-div > div > button, .current-user-selection-btn {
+    border-radius: 5px !important;
+    border-width: 2px !important;
+  }
+
+  .button-div {
+    width: 100%;
+    padding: 5px !important;
+    button {
+      border-width: 2px !important;
+      font-size: 0.8rem !important;
+      box-shadow: 0 5px 0 0 $primary-clr-3 !important;
+      border-radius: 4px !important;
+    }
+    button[select="true"] {
+      margin-top: 5px !important;
+      box-shadow: 0 1px 0 0 $primary-clr-3 !important;
+    }
+  }
+
+  .mode-section {
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .container {
+    @include dFlexCenter(column);
+
+    .play-btn {
+      @include size(150px, 60px);
+      font-size: 0.8rem;
+    }
+
+    .alert-box-container {
+      .alert-box {
+        @include size(250px, 100px);
+        font-size: 0.8rem;
+        button {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .user-list-container {
+    width: 250px !important;
+    hr {
+      margin: 10px 0 !important;
+    }
+    p {
+      box-shadow: none !important;
+      border: 3px solid $primary-clr-2 !important;
+      font-size: 0.6rem !important;
+      padding: 0.5rem !important;
+    }
+    .user-list {
+      .user {
+        height: 30px !important;
+        li {
+          padding: 0.25rem !important;
+          font-size: 0.5rem !important;
+        }
+        button {
+          font-size: 0.65rem !important;
+        }
+      }
+    }
+  }
+}

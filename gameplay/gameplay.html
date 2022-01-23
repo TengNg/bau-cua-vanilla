@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="gameplay.css">
+  <title>Chơi Bầu Cua</title>
+</head>
+
+<body>
+  <div class='result-alert'></div>
+  <div class="container">
+    <!-- USERNAME -->
+    <p class="user"></p>
+    <!-- BUTTON -->
+    <button class='leave-btn'><i class="fas fa-sign-out-alt"></i></button>
+    <button class='show-guide-box'><i class="fas fa-question-circle"></i></button>
+    <!-- GUIDE BOX -->
+    <div class="guide-box">
+      <button class='close-guide-box-btn'><i class="far fa-times-circle"></i></button>
+      <pre>
+    <span>Hướng dẫn</span>:
+    - Luật chơi như trò Bầu Cua truyền thống.  
+    - Click vào những ô hươu, bầu, ... muốn đặt cược.
+    - Sau khi chọn xong, click vào nút <i class="fas fa-sync-alt"></i> để bắt đầu xóc dĩa.
+
+    <span>Lưu ý</span>: Có thể bấm chuột phải vào ô đặt cược để hiện khung thay đổi mức cược.
+
+      Các mức cược tương ứng sẽ là:
+         x1 : Bằng với mức cược hiện tại
+         x2 : Gấp 2 lần mức cược hiện tại
+         x3 : Gấp 3 lần mức cược hiện tại
+         x4 : Gấp 4 lần mức cược hiện tại
+         x5 : Gấp 5 lần mức cược hiện tại
+         ...
+      </pre>
+    </div>
+
+    <div class='alert-box-container'>
+      <!-- DANGER ALERT BOX -->
+      <div class="alert-box">
+        <p class='alert-box-text'></p>
+        <button class='close-alert-box-btn'><i class="far fa-times-circle"></i></button>
+        <button class='add-money-btn'>Thêm tiền</button>
+      </div>
+      <!-- INCREASE BET LEVEL -->
+      <div class="increase-bet-level-box">
+        <button><i class="far fa-times-circle"></i></button>
+        <p>Thay đổi mức đặt cược</p>
+        <!-- item name -->
+        <p>(<span class='item-name'></span>)</p>
+        <!-- bet level list -->
+        <ul class="increase-bet-level-box-list">
+          <li selected=false>x1</li>
+          <li selected=false>x2</li>
+          <li selected=false>x3</li>
+          <li selected=false>x4</li>
+          <li selected=false>x5</li>
+          <li selected=false>x6</li>
+          <li selected=false>x7</li>
+          <li selected=false>x8</li>
+          <li selected=false>x9</li>
+          <li selected=false>x10</li>
+        </ul>
+        <button>OK</button>
+      </div>
+      <!-- ADD MONEY -->
+      <div class="add-money-box">
+        <button class='close-add-money-box-btn'><i class="far fa-times-circle"></i></button>
+        <p>Chọn số tiền muốn thêm</p>
+        <ul class="add-money-box-list">
+          <li>10000</li>
+          <li>20000</li>
+          <li>50000</li>
+          <li>100000</li>
+        </ul>
+      </div>
+    </div> <!-- alert box container -->
+
+    <!-- RESULT BOARD -->
+    <div class='info'>
+      <div class="loading-box">
+        <div class='loading loading1'></div>
+        <div class='loading loading2'></div>
+        <div class='loading loading1'></div>
+      </div>
+      <div class='result'>
+        <div class='cube'><img src="../img/fish.png"></div>
+        <div class='cube'><img src="../img/crab.png"></div>
+        <div class='cube'><img src="../img/crab.png"></div>
+      </div>
+      <button class='shake-btn'><i class="fas fa-sync-alt"></i></button>
+    </div>
+
+    <!-- BOARD -->
+    <section class="board">
+      <p>Tổng số tiền: <span class='total-money'></span></p>
+      <!-- BOXES -->
+      <div class="box">
+        <div select=false bet-level=1 name="hươu">
+          <p class='level'></p>
+          <img src="../img/deer.png" alt="hươu">
+        </div>
+        <div select=false bet-level=1 name="bầu">
+          <p class='level'></p>
+          <img src="../img/gourd.png" alt="bầu">
+        </div>
+        <div select=false bet-level=1 name="gà">
+          <p class='level'></p>
+          <img src="../img/rooster.png" alt="gà">
+        </div>
+        <div select=false bet-level=1 name="cá">
+          <p class='level'></p>
+          <img src="../img/fish.png" alt="cá">
+        </div>
+        <div select=false bet-level=1 name="cua">
+          <p class='level'></p>
+          <img src="../img/crab.png" alt="cua">
+        </div>
+        <div select=false bet-level=1 name="tôm">
+          <p class='level'></p>
+          <img src="../img/shrimp.png" alt="tôm">
+        </div>
+      </div>
+      <p class='bet-size-box'>Mức cược: <span class='bet-size'></span></p>
+    </section>
+
+  </div> <!-- Container -->
+
+  <script src='gameplay.js'></script>
+</body>
+
+</html>

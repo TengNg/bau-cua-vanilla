@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Bầu Cua</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Show guide button -->
+    <button class='show-guide-btn'><i class="fas fa-exclamation-circle"></i></button>
+    <div class="guide-box">
+      <button class='close-guide-box-btn'><i class="far fa-times-circle"></i></button>
+      <pre>
+                        <span>Hướng dẫn</span>:
+
+        - Bắt đầu, người chơi chọn vào 1 trong 3 ô mức cược.
+
+        - Bấm nút <b>NHẬP TÊN</b> để nhập tên tài khoản, sau đó bấm Enter để vào chơi. 
+
+        - Bấm nút <b>CHƠI NGAY</b> để được vào lại tên tài khoản gần nhất đã tạo.
+        
+        - Bấm nút <i class="fas fa-user"></i> để hiện tên người chơi và số tiền của người chơi được lưu.
+
+          <span>Lưu ý</span>: 
+          
+          - Tên người chơi sẽ được lưu lại (tối đa 8) sau mỗi lần Nhập tên mới.
+
+          - Người chơi có thể nhập lại tên cũ để được cấp lại số tiền trước đó. 
+
+          - Mỗi tài khoản sẽ được cấp mặc định $100,000 khi bắt đầu.
+      </pre>
+    </div>
+
+    <!-- USER INPUT -->
+    <div class='user-input-container'>
+      <div class="user-input">
+        <form>
+          <button type='submit' class='form-submit-btn'>OK</button>
+          <button class='close-user-input-btn'><i class="far fa-times-circle"></i></button>
+          <p>Nhập tên của bạn</p>
+          <input type="text" maxlength="15">
+          <p class='note'>
+            *Bạn có thể nhập lại tên cũ để được cấp lại toàn bộ số tiền trước đó
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- CURRENT LOCAL USER -->
+    <div class="current-user-selection">
+      <div class="user-list-container">
+        <button class='current-user-selection-close-btn'><i class="far fa-times-circle"></i></button>
+        <p>Tên những người chơi được lưu</p>
+        <hr>
+        <ul class='user-list'></ul>
+      </div>
+    </div>
+
+    <!-- DANGER ALERT BOX -->
+    <div class='alert-box-container'>
+      <div class='alert-box'>
+        <p>Vui lòng chọn mức cược!</p>
+        <button class='close-alert-box-btn'><i class="far fa-times-circle"></i></button>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <header class='title'>Bầu Cua</header>
+    <!-- play button -->
+    <div class="play-btn-div">
+      <div class="play-btn-1-wrapper"><button clicked=false class='play-btn-1'>nhập tên</button></div>
+      <div class="play-btn-2-wrapper"><button clicked=false class='play-btn-2'>chơi ngay</button></div>
+    </div>
+    <!-- show user list -->
+    <div class="current-user-selection-btn-container">
+      <button class='current-user-selection-btn'><i class="fas fa-user"></i></button>
+    </div>
+    <!-- mode button -->
+    <div class='mode-section'>
+      <p>Chọn mức cược</p>
+      <div class="button-div">
+        <button select=false>$1000</button>
+        <button select=false>$5000</button>
+        <button select=false>$10000</button>
+        <button select=false>$20000</button>
+      </div>
+    </div>
+  </div>
+
+  <script src='app.js'></script>
+
+</body>
+
+</html>
