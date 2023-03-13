@@ -1,1 +1,1 @@
-# BauCua
+# BauCua > VanillaJS & SCSS
